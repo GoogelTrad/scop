@@ -1,4 +1,4 @@
-#include "../include/Vertex.hpp"
+#include "Vertex.hpp"
 
 Vertex::Vertex()
 {
@@ -24,3 +24,10 @@ double &Vertex::getZ(void) {return this->z;}
 void Vertex::setX(double &_x){this->x = _x;}
 void Vertex::setY(double &_y){this->y = _y;}
 void Vertex::setZ(double &_z){this->z = _z;}
+
+std::ostream &operator<<(std::ostream &stream, Vertex &ver)
+{
+	stream << ver.getX() << " " << ver.getY() << " " << ver.getZ();
+    
+	return stream;
+}

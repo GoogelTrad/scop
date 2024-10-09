@@ -1,11 +1,10 @@
 #pragma once
-#include "scop.hpp"
+#include "../include/scop.hpp"
 #include <iostream>
 
 class Vertex
 {
     private:
-        static std::map<int, Vertex &> listVer;
         double x;
         double y;
         double z;
@@ -13,6 +12,8 @@ class Vertex
         Vertex();
         Vertex(double &_x, double &_y, double &_z);
         ~Vertex();
+
+        static std::map<int, Vertex> listVer;
 
         //Getters
         double &getX(void);
@@ -24,3 +25,4 @@ class Vertex
         void setZ(double &_z);
 };
 
+std::ostream &operator<<(std::ostream &stream, Vertex &ver);

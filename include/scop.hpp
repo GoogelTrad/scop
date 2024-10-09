@@ -2,21 +2,28 @@
 #define GL_SILENCE_DEPRECATION
 
 
-//#include <GL/glut.h>
-#include <GLUT/glut.h>
+#include <GL/glut.h>
+//#include <GLUT/glut.h>
+#include <iostream>
+#include <sstream>
 #include <map>
 #include <string>
+#include <ostream>
+#include <vector>
 #include <fstream>
-#include "Vertex.hpp"
-#include "Face.hpp"
+#include "../class/Vertex.hpp"
+#include "../class/Face.hpp"
 
 #define WIDTH 800
 #define HEIGHT 600
 
+class Vertex;
+class Face;
 
 //Window.hpp
 void initDisplay(int ac, char **av);
 void vDisplay();
 
 //parsing.hpp
-void parseObj(char *file);
+bool parseObj(char *file, std::vector<std::string> &parse);
+void parseVertex(std::vector<std::string> &parse, std::map<int, Vertex> &listVer);
