@@ -7,6 +7,11 @@ RM = rm -f
 
 SRCS =	srcs/main.cpp \
 		srcs/window.cpp \
+		srcs/draw.cpp \
+		srcs/Vertex.cpp \
+		srcs/Face.cpp \
+		srcs/parsing.cpp \
+		
 		
 
 OBJC = ${SRCS:.cpp=.o}
