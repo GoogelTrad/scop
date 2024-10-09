@@ -5,6 +5,7 @@
 class Vertex
 {
     private:
+        static std::map<int, Vertex &> listVer;
         double x;
         double y;
         double z;
