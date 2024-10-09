@@ -1,7 +1,7 @@
 #include "../include/scop.hpp"
-#include "../include/Vertex.hpp"
 
 void parseObj(char *file)
 {
-    
+    std::vector<std::string> arr;
+	std::ifstream
 }
