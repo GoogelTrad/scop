@@ -1,10 +1,10 @@
 #include "../include/scop.hpp"
 
-std::map<int, Vertex> Vertex::listVer;
 Objets obj;
 
 void timerMain(int value)
 {
+    obj.setAngleY(obj.getAngleY() += 0.5f);
     glutPostRedisplay(); // Redessiner la scène
     glutTimerFunc(16, timerMain, 0); // Environ 60 FPS
     (void)value;
@@ -17,28 +17,36 @@ void vDisplay()
     glLoadIdentity();
 
     // //glMatrixMode(GL_MODELVIEW);
-    // setupCamera();
-    // glRotatef(angleY, 0.0f, 1.0f, 0.0f);
+    setupCamera();
+    glRotatef(obj.getAngleY(), 0.0f, 1.0f, 0.0f);
 
-    for(unsigned int i = 0; i < obj.getObj()[i].size(); i++)
+    for(unsigned int i = 0; i < obj.getObj().size(); i++)
     {
-        if (obj.getObj()[i].size() == 3)
-            glBegin(GL_TRIANGLES);
-        else if (obj.getObj()[i].size() == 4)
-            glBegin(GL_QUADS);
-        else
-            glBegin(GL_POLYGON);
-        for (unsigned int j = 0; j < obj.getObj()[i][j].getFaces().size(); j++)
+        std::cout << "size face = " << obj.getObj()[i].getFaces().size() << std::endl;
+        //Probleme sur les sizes
+        if (obj.getObj()[i].getFaces().size() == 3)
         {
-            for (unsigned int k = 0; k < 3; k++)
-            {
-                glVertex3f(obj.getObj()[i][j].getFaces()[k].getX(), obj.getObj()[i][j].getFaces()[k].getY(), obj.getObj()[i][j].getFaces()[k].getZ());
-                glColor4f(i * 1.0f, (i%2) * 1.0f, (i%3) * 1.0f, 1.0f);
-            }
+            // std::cout << "3" << std::endl;
+            glBegin(GL_TRIANGLES);
+        }
+        else if (obj.getObj()[i].getFaces().size() == 4)
+        {
+            // std::cout << "4" << std::endl;
+            glBegin(GL_QUADS);
+        }
+        else
+        {
+            // std::cout << "autres" << std::endl;
+            glBegin(GL_POLYGON);
+        }
+
+        for(unsigned int j = 0; j < obj.getObj()[i].getFaces().size(); j++)
+        {
+            glVertex3f(obj.getObj()[i].getFaces()[j].getX(),obj.getObj()[i].getFaces()[j].getY(), obj.getObj()[i].getFaces()[j].getZ());
+            glColor4f(j * 1.0f, (j % 2) * 1.0f, (j %3 ) * 1.0f, 1.0f);           
         }
         glEnd();
     }
-    
     glutSwapBuffers();
 }
 
@@ -64,7 +72,7 @@ int main(int ac, char **av)
     setupCamera();
 
     glutDisplayFunc(vDisplay);
-    obj.timer();
+    timerMain(0);
 
     glutMainLoop();
 

@@ -2,8 +2,8 @@
 #define GL_SILENCE_DEPRECATION
 
 
-//#include <GL/glut.h>
-#include <GLUT/glut.h>
+#include <GL/glut.h>
+//#include <GLUT/glut.h>
 #include <iostream>
 #include <sstream>
 #include <map>

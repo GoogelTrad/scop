@@ -8,12 +8,12 @@ class Vertex
         double x;
         double y;
         double z;
+        std::map<int, Vertex> listVer;
     public:
         Vertex();
         Vertex(double &_x, double &_y, double &_z);
         ~Vertex();
 
-        static std::map<int, Vertex> listVer;
 
         //Getters
         double &getX(void);

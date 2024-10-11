@@ -6,13 +6,13 @@ class Face;
 class Objets
 {
 private:
-    std::vector<std::vector<Face>> objet;
+    std::vector<Face> objet;
     float angleY;
 public:
     Objets();
     ~Objets();
 
-    std::vector<std::vector<Face>> &getObj(void);
+    std::vector<Face> &getObj(void);
 
     float &getAngleY();
     void setAngleY(float &_angleY);
