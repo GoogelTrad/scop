@@ -1,7 +1,7 @@
 NAME = scop
 CFLAGS = -Wall -Wextra -Werror -std=c++11
-#CLINKS = -framework OpenGL -framework GLUT -I/usr/local/include
-CLINKS = -lGL -lGLU -lglut
+CLINKS = -framework OpenGL -framework GLUT -I/usr/local/include
+#CLINKS = -lGL -lGLU -lglut
 CC = c++
 RM = rm -f
 
@@ -11,7 +11,8 @@ SRCS =	srcs/main.cpp \
 		class/Vertex.cpp \
 		class/Face.cpp \
 		srcs/parsing.cpp \
-		
+		class/Objets.cpp \
+
 		
 
 OBJC = ${SRCS:.cpp=.o}

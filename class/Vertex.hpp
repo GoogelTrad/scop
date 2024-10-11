@@ -19,6 +19,7 @@ class Vertex
         double &getX(void);
         double &getY(void);
         double &getZ(void);
+        std::map<int, Vertex> &getMap(void);
         //Setters
         void setX(double &_x);
         void setY(double &_y);

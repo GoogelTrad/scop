@@ -1,11 +1,6 @@
 #include "../include/scop.hpp"
 
-void vDisplay()
-{
-	glClearColor(0,0,0,0);
-	glClear(GL_COLOR_BUFFER_BIT);
-	glFlush();
-}
+
 
 void initDisplay(int ac, char **av)
 {
@@ -14,6 +9,5 @@ void initDisplay(int ac, char **av)
     glutInitWindowSize(WIDTH, HEIGHT);
     glutInitWindowPosition(50, 50);
     glutCreateWindow("scop");
-    glutDisplayFunc(vDisplay);
-    glutMainLoop();
+    glViewport(0, 0, WIDTH, HEIGHT);
 }
