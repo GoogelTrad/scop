@@ -22,7 +22,7 @@ void vDisplay()
 
     for(unsigned int i = 0; i < obj.getObj().size(); i++)
     {
-        std::cout << "size face = " << obj.getObj()[i].getFaces().size() << std::endl;
+        //std::cout << "size face = " << obj.getObj()[i].getFaces().size() << std::endl;
         //Probleme sur les sizes
         if (obj.getObj()[i].getFaces().size() == 3)
         {

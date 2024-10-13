@@ -24,6 +24,7 @@ void Objets::parseVertex(std::vector<std::string> &parse)
     Face faces;
     Vertex coucou;
 
+
 	for(unsigned int i = 0; i < parse.size(); i++)
 	{
 		if(parse[i].find("v ") == 0)
@@ -49,6 +50,8 @@ void Objets::parseVertex(std::vector<std::string> &parse)
             while (lines >> j)
                 faces.getFaces().push_back(coucou.getMap()[j]);
             
+            std::cout << "faces size = " << faces.getFaces()[i].<< std::endl;
+
             this->objet.push_back(faces);
         }
     }
