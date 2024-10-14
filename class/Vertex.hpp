@@ -5,10 +5,9 @@
 class Vertex
 {
     private:
-        double x;
-        double y;
-        double z;
-        std::map<int, Vertex> listVer;
+        double  x;
+        double  y;
+        double  z;
     public:
         Vertex();
         Vertex(double &_x, double &_y, double &_z);
@@ -19,7 +18,6 @@ class Vertex
         double &getX(void);
         double &getY(void);
         double &getZ(void);
-        std::map<int, Vertex> &getMap(void);
         //Setters
         void setX(double &_x);
         void setY(double &_y);

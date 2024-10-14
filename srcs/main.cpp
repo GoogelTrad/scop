@@ -4,7 +4,7 @@ Objets obj;
 
 void timerMain(int value)
 {
-    obj.setAngleY(obj.getAngleY() += 0.5f);
+    obj.setAngleY(obj.getAngleY() += 2.0f);
     glutPostRedisplay(); // Redessiner la scène
     glutTimerFunc(16, timerMain, 0); // Environ 60 FPS
     (void)value;
@@ -13,38 +13,33 @@ void timerMain(int value)
 
 void vDisplay()
 {
+    // double c_x = 0.0f, c_y = 2.0f, c_z = 1.0f;
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
     // //glMatrixMode(GL_MODELVIEW);
     setupCamera();
+    glTranslatef(obj.getC_X(), obj.getC_Y(), obj.getC_Z());
     glRotatef(obj.getAngleY(), 0.0f, 1.0f, 0.0f);
+    glTranslatef(-obj.getC_X(), -obj.getC_Y(), -obj.getC_Z());
 
-    for(unsigned int i = 0; i < obj.getObj().size(); i++)
+
+    for (unsigned int i = 0; i < obj.getFaces().size(); i++)
     {
-        //std::cout << "size face = " << obj.getObj()[i].getFaces().size() << std::endl;
-        //Probleme sur les sizes
-        if (obj.getObj()[i].getFaces().size() == 3)
-        {
-            // std::cout << "3" << std::endl;
+        if (obj.getFaces()[i].getVertex().size() == 3)
             glBegin(GL_TRIANGLES);
-        }
-        else if (obj.getObj()[i].getFaces().size() == 4)
-        {
-            // std::cout << "4" << std::endl;
+        else if (obj.getFaces()[i].getVertex().size() == 4)
             glBegin(GL_QUADS);
-        }
         else
-        {
-            // std::cout << "autres" << std::endl;
             glBegin(GL_POLYGON);
-        }
-
-        for(unsigned int j = 0; j < obj.getObj()[i].getFaces().size(); j++)
-        {
-            glVertex3f(obj.getObj()[i].getFaces()[j].getX(),obj.getObj()[i].getFaces()[j].getY(), obj.getObj()[i].getFaces()[j].getZ());
-            glColor4f(j * 1.0f, (j % 2) * 1.0f, (j %3 ) * 1.0f, 1.0f);           
-        }
+        if (i% 3 == 0)
+            glColor3f(0.7f, 0.7f, 0.7f);
+        if (i% 3 == 1)
+            glColor3f(0.3f, 0.3f, 0.3f);
+        if (i% 3 == 2)
+            glColor3f(0.5f, 0.5f, 0.5f);
+        for (unsigned int j = 0; j < obj.getFaces()[i].getVertex().size(); j++)
+            glVertex3f(obj.getFaces()[i].getVertex()[j].getX(), obj.getFaces()[i].getVertex()[j].getY(), obj.getFaces()[i].getVertex()[j].getZ());
         glEnd();
     }
     glutSwapBuffers();

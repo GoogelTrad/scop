@@ -9,4 +9,4 @@ Face::~Face()
 }
 
 
-std::vector<Vertex> &Face::getFaces(void) {return this->faces;}
+std::vector<Vertex> &Face::getVertex(void) {return this->vertex;}

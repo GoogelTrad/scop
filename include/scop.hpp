@@ -11,15 +11,17 @@
 #include <ostream>
 #include <vector>
 #include <fstream>
+#include <algorithm>
 #include "../class/Vertex.hpp"
 #include "../class/Face.hpp"
 #include "../class/Objets.hpp"
 
 #define WIDTH 800
-#define HEIGHT 600
+#define HEIGHT 600 	
 
 class Vertex;
 class Face;
+// Objets obj;
 
 //Window.hpp
 void initDisplay(int ac, char **av);
@@ -34,3 +36,4 @@ void setupProjection();
 void setupCamera();
 void timerMain(int value);
 void updateRotation();
+void center(double &res_x, double &res_y, double &res_z, std::vector<Vertex> coucou);

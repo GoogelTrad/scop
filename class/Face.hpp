@@ -6,12 +6,13 @@ class Vertex;
 class Face
 {
 private:
-	std::vector<Vertex> faces;
+	std::vector<Vertex> vertex;
+
 public:
 	Face();
 	~Face();
 
-	std::vector<Vertex> &getFaces(void);
+	std::vector<Vertex> &getVertex(void);
 };
 
 std::ostream &operator<<(std::ostream &stream, Face &face);

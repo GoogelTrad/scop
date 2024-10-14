@@ -19,7 +19,6 @@ Vertex::~Vertex()
 double &Vertex::getX(void) {return this->x;}
 double &Vertex::getY(void) {return this->y;}
 double &Vertex::getZ(void) {return this->z;}
-std::map<int, Vertex> &Vertex::getMap(void) {return this->listVer;}
 
 //Setter
 void Vertex::setX(double &_x){this->x = _x;}

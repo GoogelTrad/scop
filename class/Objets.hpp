@@ -6,16 +6,23 @@ class Face;
 class Objets
 {
 private:
-    std::vector<Face> objet;
+    std::vector<Face> faces;
     float angleY;
+    double c_x;
+    double c_y;
+    double c_z;
 public:
     Objets();
     ~Objets();
 
-    std::vector<Face> &getObj(void);
+    std::vector<Face> &getFaces(void);
 
     float &getAngleY();
     void setAngleY(float &_angleY);
+
+    double &getC_X();
+    double &getC_Y();
+    double &getC_Z();
 
     void parseVertex(std::vector<std::string> &parse);
     void display();

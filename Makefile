@@ -1,5 +1,5 @@
 NAME = scop
-CFLAGS = -Wall -Wextra -Werror -std=c++11
+CFLAGS = -Wall -Wextra -Werror -std=c++11 -g -fsanitize=address
 #CLINKS = -framework OpenGL -framework GLUT -I/usr/local/include
 CLINKS = -lGL -lGLU -lglut
 CC = c++
