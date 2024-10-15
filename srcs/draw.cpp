@@ -7,8 +7,8 @@ void setupCamera()
 
     glMatrixMode(GL_MODELVIEW); 
     glLoadIdentity();
-    gluLookAt(0.0, 0.0, 20,   // Position de la caméra
-              0.0, 0.0, 0.0,   // Point à regarder
+    gluLookAt(0.0, 0.0, 10,   // Position de la caméra
+              obj.getC_X(), obj.getC_Y(), obj.getC_Z(),   // Point à regarder
               0.0, 1.0, 0.0);  // Vecteur 'up'
 }
 
@@ -16,7 +16,7 @@ void setupProjection()
 {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(45.0f, 800.0f / 600.0f, 0.1f, 100.0f); // FOV, ratio, near, far
+    gluPerspective(45.0f, (float)obj.getWidth() / (float)obj.getHeight(), 0.1f, 100.0f); // FOV, ratio, near, far
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 }
@@ -49,4 +49,12 @@ void center(double &res_x, double &res_y, double &res_z, std::vector<Vertex> cou
     res_x = (x + min_x) / 2;
     res_y = (y + min_y) / 2;
     res_z = (z + min_z) / 2;
+}
+
+float random_color()
+{
+    float res;
+
+    res = std::rand() / static_cast<float>(RAND_MAX);
+    return res;
 }

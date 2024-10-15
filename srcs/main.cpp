@@ -2,11 +2,25 @@
 
 Objets obj;
 
+void reshape(int width, int height)
+{
+    obj.setHeight(height);
+    obj.setWidth(width);
+
+    glViewport(0, 0, width, height);
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(45.0, (GLfloat)width / (GLfloat)height, 1.0, 100.0);
+
+    glMatrixMode(GL_MODELVIEW);
+}
+
 void timerMain(int value)
 {
     obj.setAngleY(obj.getAngleY() += 2.0f);
-    glutPostRedisplay(); // Redessiner la scène
-    glutTimerFunc(16, timerMain, 0); // Environ 60 FPS
+    glutPostRedisplay();
+    glutTimerFunc(16, timerMain, 0);
     (void)value;
 }
 
@@ -32,12 +46,14 @@ void vDisplay()
             glBegin(GL_QUADS);
         else
             glBegin(GL_POLYGON);
-        if (i% 3 == 0)
-            glColor3f(0.7f, 0.7f, 0.7f);
-        if (i% 3 == 1)
-            glColor3f(0.3f, 0.3f, 0.3f);
-        if (i% 3 == 2)
-            glColor3f(0.5f, 0.5f, 0.5f);
+        // if (i% 3 == 0)
+            // glColor3f(obj.getFaces()[i].getColor() * 0.1f, obj.getFaces()[i].getColor() * 0.1f, obj.getFaces()[i].getColor() * 0.1f);
+        glColor3f(obj.getFaces()[i].getRed(), obj.getFaces()[i].getGreen(), obj.getFaces()[i].getBlue());
+
+        // if (i% 3 == 1)
+        //     glColor3f(0.3f, 0.3f, 0.3f);
+        // if (i% 3 == 2)
+        //     glColor3f(0.5f, 0.5f, 0.5f);
         for (unsigned int j = 0; j < obj.getFaces()[i].getVertex().size(); j++)
             glVertex3f(obj.getFaces()[i].getVertex()[j].getX(), obj.getFaces()[i].getVertex()[j].getY(), obj.getFaces()[i].getVertex()[j].getZ());
         glEnd();
@@ -47,6 +63,7 @@ void vDisplay()
 
 int main(int ac, char **av)
 {
+    std::srand(std::time(0));
     std::vector<std::string> parse;
 
     if (ac)
@@ -66,6 +83,8 @@ int main(int ac, char **av)
     setupProjection();
     setupCamera();
 
+    glutReshapeFunc(reshape);
+    glScalef(0.1f, 0.1f, 0.1f);
     glutDisplayFunc(vDisplay);
     timerMain(0);
 

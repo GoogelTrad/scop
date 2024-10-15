@@ -6,6 +6,8 @@ Objets::Objets()
     this->c_x = 0;
     this->c_y = 0;
     this->c_z = 0;
+    this->height = HEIGHT;
+    this->width = WIDTH;
 }
 
 Objets::~Objets()
@@ -16,6 +18,10 @@ std::vector<Face> &Objets::getFaces(void) {return this->faces;}
 
 float &Objets::getAngleY(void) {return this->angleY;}
 void Objets::setAngleY(float &_angleY) {this->angleY = _angleY;}
+void Objets::setWidth(int &_w) {this->width = _w;}
+void Objets::setHeight(int &_h) {this->height = _h;}
+int &Objets::getWidth(void) {return this->width;}
+int &Objets::getHeight(void) {return this->height;}
 double &Objets::getC_X(void) {return this->c_x;}
 double &Objets::getC_Y(void) {return this->c_y;}
 double &Objets::getC_Z(void) {return this->c_z;}
@@ -38,11 +44,7 @@ void Objets::parseVertex(std::vector<std::string> &parse)
             
 		}
 	}
-
     center(this->c_x, this->c_y, this->c_z, coucou);
-
-    std::cout << "x = " << this->c_x << "y = " << this->c_y << "z = " << this->c_z << std::endl;
-
     for(unsigned int i = 0; i < parse.size(); i++)
     {
         if (parse[i].find("f ") == 0)
@@ -51,7 +53,6 @@ void Objets::parseVertex(std::vector<std::string> &parse)
             std::istringstream lines(sub);
 
             Face newFace;
-
             int j = 0;
             while (lines >> j)
             {

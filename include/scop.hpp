@@ -10,8 +10,10 @@
 #include <string>
 #include <ostream>
 #include <vector>
+#include <cstdlib>
 #include <fstream>
 #include <algorithm>
+#include <ctime>
 #include "../class/Vertex.hpp"
 #include "../class/Face.hpp"
 #include "../class/Objets.hpp"
@@ -37,3 +39,4 @@ void setupCamera();
 void timerMain(int value);
 void updateRotation();
 void center(double &res_x, double &res_y, double &res_z, std::vector<Vertex> coucou);
+float random_color();
