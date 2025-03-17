@@ -2,21 +2,24 @@
 #define GL_SILENCE_DEPRECATION
 
 
-#include <GL/glut.h>
-//#include <GLUT/glut.h>
+// #include <GL/glut.h>
+#include <GLUT/glut.h>
 #include <iostream>
 #include <sstream>
 #include <map>
 #include <string>
 #include <ostream>
 #include <vector>
+#include <array>
 #include <cstdlib>
 #include <fstream>
 #include <algorithm>
 #include <ctime>
+#include <cmath>
 #include "../class/Vertex.hpp"
 #include "../class/Face.hpp"
 #include "../class/Objets.hpp"
+#include "../class/Matrices.hpp"
 
 #define WIDTH 800
 #define HEIGHT 600 	

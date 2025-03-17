@@ -27,15 +27,22 @@ void timerMain(int value)
 
 void vDisplay()
 {
-    // double c_x = 0.0f, c_y = 2.0f, c_z = 1.0f;
+    Matrices m;
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
+    // m.loadIdentity();
 
-    // //glMatrixMode(GL_MODELVIEW);
+    glMatrixMode(GL_MODELVIEW);
     setupCamera();
     glTranslatef(obj.getC_X(), obj.getC_Y(), obj.getC_Z());
+    // m.translate(obj.getC_X(), obj.getC_Y(), obj.getC_Z());
+    // m.loadToOpenGL();
     glRotatef(obj.getAngleY(), 0.0f, 1.0f, 0.0f);
+    // m.rotate(obj.getAngleY(), 0.0f, 1.0f, 0.0f);
+    // m.loadToOpenGL();
     glTranslatef(-obj.getC_X(), -obj.getC_Y(), -obj.getC_Z());
+    // m.translate(-obj.getC_X(), -obj.getC_Y(), -obj.getC_Z());
+    // m.loadToOpenGL();
 
 
     for (unsigned int i = 0; i < obj.getFaces().size(); i++)
@@ -46,14 +53,9 @@ void vDisplay()
             glBegin(GL_QUADS);
         else
             glBegin(GL_POLYGON);
-        // if (i% 3 == 0)
-            // glColor3f(obj.getFaces()[i].getColor() * 0.1f, obj.getFaces()[i].getColor() * 0.1f, obj.getFaces()[i].getColor() * 0.1f);
+
         glColor3f(obj.getFaces()[i].getRed(), obj.getFaces()[i].getGreen(), obj.getFaces()[i].getBlue());
 
-        // if (i% 3 == 1)
-        //     glColor3f(0.3f, 0.3f, 0.3f);
-        // if (i% 3 == 2)
-        //     glColor3f(0.5f, 0.5f, 0.5f);
         for (unsigned int j = 0; j < obj.getFaces()[i].getVertex().size(); j++)
             glVertex3f(obj.getFaces()[i].getVertex()[j].getX(), obj.getFaces()[i].getVertex()[j].getY(), obj.getFaces()[i].getVertex()[j].getZ());
         glEnd();
