@@ -6,29 +6,21 @@ void setupCamera()
 {
     Matrices mCam;
     glMatrixMode(GL_MODELVIEW);
-    // glLoadIdentity();
     mCam.loadIdentity();
     mCam.lookAt(0.0, 0.0, 10,
                obj.getC_X(), obj.getC_Y(), obj.getC_Z(),
                0.0, 1.0, 0.0);
     mCam.loadToOpenGL();
-    // gluLookAt(0.0, 0.0, 10,
-    //           obj.getC_X(), obj.getC_Y(), obj.getC_Z(),
-    //           0.0, 1.0, 0.0);
 }
 
 void setupProjection()
 {
     Matrices mProj;
     glMatrixMode(GL_PROJECTION);
-    // glLoadIdentity();
-    // gluPerspective(45.0f, (float)obj.getWidth() / (float)obj.getHeight(), 0.1f, 100.0f);
     mProj.loadIdentity();
     mProj.perpective(45.0f, (float)obj.getWidth() / (float)obj.getHeight(), 0.1f, 100.0f);
     mProj.loadToOpenGL();
     glMatrixMode(GL_MODELVIEW);
-    mProj.loadIdentity();
-    // glLoadIdentity();
 }
 
 

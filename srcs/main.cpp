@@ -24,26 +24,29 @@ void timerMain(int value)
     (void)value;
 }
 
-
 void vDisplay()
 {
     Matrices m;
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glLoadIdentity();
-    // m.loadIdentity();
+    m.loadIdentity();
 
-    glMatrixMode(GL_MODELVIEW);
-    setupCamera();
-    glTranslatef(obj.getC_X(), obj.getC_Y(), obj.getC_Z());
-    // m.translate(obj.getC_X(), obj.getC_Y(), obj.getC_Z());
-    // m.loadToOpenGL();
-    glRotatef(obj.getAngleY(), 0.0f, 1.0f, 0.0f);
-    // m.rotate(obj.getAngleY(), 0.0f, 1.0f, 0.0f);
-    // m.loadToOpenGL();
-    glTranslatef(-obj.getC_X(), -obj.getC_Y(), -obj.getC_Z());
-    // m.translate(-obj.getC_X(), -obj.getC_Y(), -obj.getC_Z());
-    // m.loadToOpenGL();
+    Matrices t1;
+    t1.loadIdentity();
+    t1.translate(-obj.getC_X(), -obj.getC_Y(), -obj.getC_Z());
 
+    Matrices r;
+    r.loadIdentity();
+    r.rotate(obj.getAngleY(), 0.0f, 1.0f, 0.0f);
+
+    Matrices t2;
+    t2.loadIdentity();
+    t2.translate(obj.getC_X(), obj.getC_Y(), obj.getC_Z());
+
+    m = t2;
+    m = m * &r;
+    m = m * &t1;
+
+    m.loadToOpenGL();
 
     for (unsigned int i = 0; i < obj.getFaces().size(); i++)
     {

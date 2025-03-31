@@ -66,22 +66,20 @@ void Matrices::translate(float ax, float ay, float az)
     matrice[2][3] = az;
 }
 
+
 void Matrices::rotate(float angleY, float x, float y, float z)
 {
-   // Convertir l'angle en radians
     float rad = angleY * (M_PI / 180.0f);
     float cosA = cos(rad);
     float sinA = sin(rad);
     float oneMinusCosA = 1.0f - cosA;
 
-    // Normaliser le vecteur de l'axe
     float length = sqrt(x * x + y * y + z * z);
-    if (length == 0) return; // Éviter la division par zéro
+    if (length == 0) return;
     x /= length;
     y /= length;
     z /= length;
 
-    // Créer la matrice de rotation
     float rotation[4][4] = {
         { cosA + x * x * oneMinusCosA, x * y * oneMinusCosA - z * sinA, x * z * oneMinusCosA + y * sinA, 0.0f },
         { y * x * oneMinusCosA + z * sinA, cosA + y * y * oneMinusCosA, y * z * oneMinusCosA - x * sinA, 0.0f },
@@ -89,37 +87,15 @@ void Matrices::rotate(float angleY, float x, float y, float z)
         { 0.0f, 0.0f, 0.0f, 1.0f }
     };
 
-    // Multiplier la matrice de rotation par la matrice actuelle
-    Matrices result;
+    Matrices temp = *this; // Sauvegarde la matrice actuelle
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
-            result.matrice[i][j] = 0.0f;
+            matrice[i][j] = 0.0f;
             for (int k = 0; k < 4; ++k) {
-                result.matrice[i][j] += result.matrice[i][k] * rotation[k][j];
+                matrice[i][j] += temp.matrice[i][k] * rotation[k][j];
             }
         }
     }
-    /*
-    		float b = angle;
-
-		float c = cosf(b);
-		float ac = 1.00f - c;
-		float s = sinf(b);
-
-		rot.m[0] = axis.x * axis.x * ac + c;
-		rot.m[1] = axis.x * axis.y * ac + axis.z * s;
-		rot.m[2] = axis.x * axis.z * ac - axis.y * s;
-
-		rot.m[4] = axis.y * axis.x * ac - axis.z * s;
-		rot.m[5] = axis.y * axis.y * ac + c;
-		rot.m[6] = axis.y * axis.z * ac + axis.x * s;
-		
-		rot.m[8] = axis.z * axis.x * ac + axis.y * s;
-		rot.m[9] = axis.z * axis.y * ac - axis.x * s;
-		rot.m[10] = axis.z * axis.z * ac + c;*/
-
-    // Copier le résultat dans la matrice actuelle
-    *this = result;
 }
 
 void Matrices::scale(float sx, float sy, float sz)
@@ -138,7 +114,7 @@ void Matrices::perpective(float fov, float aspect, float near, float far)
     matrice[1][1] = 1.0f / tanHalfFov;
     matrice[2][2] = (-near - far) / range;
     matrice[2][3] = 2 * far * near / range;
-    matrice[3][2] = 1.0f;
+    matrice[3][2] = -1.0f;
     matrice[3][3] = 0.0f;
 }
 
@@ -154,40 +130,34 @@ void Matrices::print() const {
 void Matrices::lookAt(float eyeX, float eyeY, float eyeZ, 
             float centerX, float centerY, float centerZ, 
             float upX, float upY, float upZ) {
-    // Calculez la direction du regard
+
     float fwdX = centerX - eyeX;
     float fwdY = centerY - eyeY;
     float fwdZ = centerZ - eyeZ;
 
-    // Normalisez la direction de vue
     float fwdLength = std::sqrt(fwdX * fwdX + fwdY * fwdY + fwdZ * fwdZ);
     fwdX /= fwdLength;
     fwdY /= fwdLength;
     fwdZ /= fwdLength;
 
-    // Calculez le vecteur "up" (normalisé)
     float upLength = std::sqrt(upX * upX + upY * upY + upZ * upZ);
     upX /= upLength;
     upY /= upLength;
     upZ /= upLength;
 
-    // Calculez le vecteur "right"
     float rightX = upY * fwdZ - upZ * fwdY;
     float rightY = upZ * fwdX - upX * fwdZ;
     float rightZ = upX * fwdY - upY * fwdX;
 
-    // Normalisez le vecteur "right"
     float rightLength = std::sqrt(rightX * rightX + rightY * rightY + rightZ * rightZ);
     rightX /= rightLength;
     rightY /= rightLength;
     rightZ /= rightLength;
 
-    // Recalculez le vecteur "up" pour s'assurer qu'il est orthogonal
     upX = fwdY * rightZ - fwdZ * rightY;
     upY = fwdZ * rightX - fwdX * rightZ;
     upZ = fwdX * rightY - fwdY * rightX;
 
-    // Remplissez la matrice
     matrice[0][0] = rightX;
     matrice[0][1] = rightY;
     matrice[0][2] = rightZ;
